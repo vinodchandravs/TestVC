@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
-    document.writeln('<meta name="apple-itunes-app" content="app-id=1:1059443437317:ios:1e0bcdadc0ca1e3919d16c">');
+    <script type="text/javascript">
+		
+		window.onload = function(){
+			var delayInMilliseconds = 5000; //5 second
+
+			setTimeout(function() {
+				myFunction();
+  
+				}, delayInMilliseconds);
+            }
+
+        function myFunction() {
+  			var refButton = document.getElementById("urlButton");
+            refButton.onclick();
+  
+		}
+        
 	</script>
 </head>
 <body>
-  <p>v7, If you are not redirected, please click below </p>
+  <p>v3, If you are not redirected, please click below </p>
   <input type="button" id="urlButton" onclick="location.href='https://tractorsupplymobile.page.link/?link=https%3A%2F%2Fwww.tractorsupply.com%2F%3FwcsId%3D549109685%26orderId%3D1081491080%26screenId%3DOrderDetails&apn=com.consumerapp_v1&amv=22&imv=17&ibi=com.tractorsupply.CMA&ifl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&afl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&ofl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&efr=1';" value="Go to OrderDetails" />
   <br></br>
   <a id="anchorID" href="https://tractorsupplymobile.page.link/?link=https%3A%2F%2Fwww.tractorsupply.com%2F%3FwcsId%3D549109685%26orderId%3D1081491080%26screenId%3DOrderDetails&apn=com.consumerapp_v1&amv=22&imv=17&ibi=com.tractorsupply.CMA&ifl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&afl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&ofl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&efr=1"></a>
   <br></br>
-  
+  <button onclick="myFunction()">Navigate - SAME</button>
 </body>
 </html>
