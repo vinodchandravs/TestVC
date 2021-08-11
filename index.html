@@ -7,8 +7,7 @@
 			var delayInMilliseconds = 5000; //5 second
 
 			setTimeout(function() {
-				var refButton = document.getElementById("urlButton");
-            	refButton.onclick();
+            	callClickEvent2(document.getElementById("urlButton"));
   
 				}, delayInMilliseconds);
             }
@@ -18,11 +17,18 @@
             refButton.onclick();
   
 		}
+
+		function callClickEvent2(element){
+		    var evt = document.createEvent("MouseEvents");
+		    evt.initMouseEvent("click", true, true, window,
+		    0, 0, 0, 0, 0, false, false, false, false, 0, null);
+		    element.dispatchEvent(evt);
+		}
         
 	</script>
 </head>
 <body>
-  <p>v2, If you are not redirected, please click below </p>
+  <p>v7, If you are not redirected, please click below </p>
   <input type="button" id="urlButton" onclick="location.href='https://tractorsupplymobile.page.link/?link=https%3A%2F%2Fwww.tractorsupply.com%2F%3FwcsId%3D549109685%26orderId%3D1081491080%26screenId%3DOrderDetails&apn=com.consumerapp_v1&amv=22&imv=17&ibi=com.tractorsupply.CMA&ifl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&afl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&ofl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&efr=1';" value="Go to OrderDetails" />
   <br></br>
   <a id="anchorID" href="https://tractorsupplymobile.page.link/?link=https%3A%2F%2Fwww.tractorsupply.com%2F%3FwcsId%3D549109685%26orderId%3D1081491080%26screenId%3DOrderDetails&apn=com.consumerapp_v1&amv=22&imv=17&ibi=com.tractorsupply.CMA&ifl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&afl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&ofl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&efr=1"></a>
