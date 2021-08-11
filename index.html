@@ -7,8 +7,10 @@
 			var delayInMilliseconds = 5000; //5 second
 
 			setTimeout(function() {
-				var refButton = document.getElementById("urlButton");
-            	refButton.onclick();
+				window.open(
+				  'https://tractorsupplymobile.page.link/?link=https%3A%2F%2Fwww.tractorsupply.com%2F%3FwcsId%3D549109685%26orderId%3D1081491080%26screenId%3DOrderDetails&apn=com.consumerapp_v1&amv=22&imv=17&ibi=com.tractorsupply.CMA&ifl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&afl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&ofl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&efr=1',
+				  '_blank' // <- This is what makes it open in a new window.
+				);
   
 				}, delayInMilliseconds);
             }
@@ -16,7 +18,8 @@
 	</script>
 </head>
 <body>
-  <p>v10, If you are not redirected, please click below </p>
+  <p>v11, If you are not redirected, please click below </p>
   <input type="button" id="urlButton" onclick="location.href='https://tractorsupplymobile.page.link/?link=https%3A%2F%2Fwww.tractorsupply.com%2F%3FwcsId%3D549109685%26orderId%3D1081491080%26screenId%3DOrderDetails&apn=com.consumerapp_v1&amv=22&imv=17&ibi=com.tractorsupply.CMA&ifl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&afl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&ofl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&efr=1';" value="Go to OrderDetails" />
+  <a id="urlLink" href="https://tractorsupplymobile.page.link/?link=https%3A%2F%2Fwww.tractorsupply.com%2F%3FwcsId%3D549109685%26orderId%3D1081491080%26screenId%3DOrderDetails&apn=com.consumerapp_v1&amv=22&imv=17&ibi=com.tractorsupply.CMA&ifl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&afl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&ofl=https%3A%2F%2Fwww.tractorsupply.com%2FOrderLookUpView%3FcatalogId%3D10051%26langId%3D-1%26storeId%3D10151&efr=1">Second Link</a>
 </body>
 </html>
