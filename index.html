@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VC Testing 34</title>
+  <title>VC Testing 35</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
 </head>
 
 <body>
-  <h1>VC TESTING 33</h1>
+  <h1>VC TESTING 35</h1>
 
   <button id="urlButton" type="button">Go Via Smart Link</button>
 
@@ -38,7 +38,6 @@
   <script>
     const webUrl = 'https://www.tractorsupply.com/tsc/catalog/lawn-mowers?filter=71%7CSale';
     const appUrl = 'tractorapp:/ProductList/categoryId=3074457345616723669&facet=71%3A%22Sale%22';
-    const androidPackage = 'com.consumerapp_v1';
 
     function log(message) {
       const status = document.getElementById('status');
@@ -53,58 +52,47 @@
       return /iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
 
+    function tryAppThenFallback(platformName, timeoutMs) {
+      log('Detected ' + platformName);
+      log('Trying app URL, then fallback only if browser stays visible');
+
+      let appOpened = false;
+
+      const markAppOpened = () => {
+        appOpened = true;
+        log('Page hidden/blurred, assuming app opened');
+      };
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          markAppOpened();
+        }
+      }, { once: true });
+
+      window.addEventListener('pagehide', markAppOpened, { once: true });
+      window.addEventListener('blur', markAppOpened, { once: true });
+
+      window.location.href = appUrl;
+
+      setTimeout(() => {
+        if (!appOpened) {
+          log('App did not open, going to web fallback');
+          window.location.href = webUrl;
+        }
+      }, timeoutMs);
+    }
+
     function openSmartLink() {
       document.getElementById('status').textContent = 'Clicked';
       log('User Agent: ' + navigator.userAgent);
 
       if (isAndroid()) {
-        log('Detected Android');
-        log('Trying app via Android intent URL');
-
-        const appPath = appUrl.replace('tractorapp:', '');
-        const fallback = encodeURIComponent(webUrl);
-
-        const intentUrl =
-          'intent:' + appPath +
-          '#Intent;' +
-          'scheme=tractorapp;' +
-          'package=' + androidPackage + ';' +
-          'S.browser_fallback_url=' + fallback + ';' +
-          'end';
-
-        window.location.href = intentUrl;
+        tryAppThenFallback('Android', 1800);
         return;
       }
 
       if (isIOS()) {
-        log('Detected iOS');
-        log('Trying app URL, then fallback after timeout');
-
-        let appOpened = false;
-
-        const markAppOpened = () => {
-          appOpened = true;
-          log('Page hidden/blurred, assuming app opened');
-        };
-
-        document.addEventListener('visibilitychange', () => {
-          if (document.hidden) {
-            markAppOpened();
-          }
-        }, { once: true });
-
-        window.addEventListener('pagehide', markAppOpened, { once: true });
-        window.addEventListener('blur', markAppOpened, { once: true });
-
-        window.location.href = appUrl;
-
-        setTimeout(() => {
-          if (!appOpened) {
-            log('App did not open, going to web fallback');
-            window.location.href = webUrl;
-          }
-        }, 1500);
-
+        tryAppThenFallback('iOS', 1500);
         return;
       }
 
