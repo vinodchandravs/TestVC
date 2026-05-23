@@ -1,7 +1,119 @@
-<html>
-<head</head>
-	<body>
-		<h1>VC TESTING 33</h1>
-		<input type="button" id="urlButton" onclick="https://www.tractorsupply.com/tsc/cms/social-contest-online?cid=OnsiteDisplay-OnsiteDisplay-PET_RMN-NestlePurina_500152_Purina_FY240138_104202_202408PurinahuntingeventLockout_Vendor_PET_Broad_Broad&utm_medium=OnsiteDisplay&utm_source=OnsiteDisplay&utm_campaign=PET_RMN&utm_content=NestlePurina_500152_Purina_FY240138_104202_202408PurinahuntingeventLockout_Vendor_PET_Broad_Broad'" value="Go Via HREF" />
-	</body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VC Testing 34</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+      line-height: 1.4;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 18px;
+      cursor: pointer;
+    }
+
+    #status {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      background: #f4f4f4;
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>VC TESTING 33</h1>
+
+  <button id="urlButton" type="button">Go Via Smart Link</button>
+
+  <div id="status">Waiting...</div>
+
+  <script>
+    const webUrl = 'https://www.tractorsupply.com/tsc/catalog/lawn-mowers?filter=71%7CSale';
+    const appUrl = 'tractorapp:/ProductList/categoryId=3074457345616723669&facet=71%3A%22Sale%22';
+    const androidPackage = 'com.consumerapp_v1';
+
+    function log(message) {
+      const status = document.getElementById('status');
+      status.textContent += '\n' + message;
+    }
+
+    function isAndroid() {
+      return /Android/i.test(navigator.userAgent);
+    }
+
+    function isIOS() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    function openSmartLink() {
+      document.getElementById('status').textContent = 'Clicked';
+      log('User Agent: ' + navigator.userAgent);
+
+      if (isAndroid()) {
+        log('Detected Android');
+        log('Trying app via Android intent URL');
+
+        const appPath = appUrl.replace('tractorapp:', '');
+        const fallback = encodeURIComponent(webUrl);
+
+        const intentUrl =
+          'intent:' + appPath +
+          '#Intent;' +
+          'scheme=tractorapp;' +
+          'package=' + androidPackage + ';' +
+          'S.browser_fallback_url=' + fallback + ';' +
+          'end';
+
+        window.location.href = intentUrl;
+        return;
+      }
+
+      if (isIOS()) {
+        log('Detected iOS');
+        log('Trying app URL, then fallback after timeout');
+
+        let appOpened = false;
+
+        const markAppOpened = () => {
+          appOpened = true;
+          log('Page hidden/blurred, assuming app opened');
+        };
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            markAppOpened();
+          }
+        }, { once: true });
+
+        window.addEventListener('pagehide', markAppOpened, { once: true });
+        window.addEventListener('blur', markAppOpened, { once: true });
+
+        window.location.href = appUrl;
+
+        setTimeout(() => {
+          if (!appOpened) {
+            log('App did not open, going to web fallback');
+            window.location.href = webUrl;
+          }
+        }, 1500);
+
+        return;
+      }
+
+      log('Detected desktop/other');
+      log('Going to web URL');
+      window.location.href = webUrl;
+    }
+
+    document.getElementById('urlButton').addEventListener('click', openSmartLink);
+  </script>
+</body>
 </html>
